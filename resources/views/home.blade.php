@@ -89,6 +89,22 @@
         </div>
     </section>
 
+       {{-- Perulangan --}}
+    @for ($i = 0; $i < 10; $i++)
+    The current value is {{ $i }}
+    @endfor
+
+    {{-- If-Else --}}
+    {{--
+    @if (count($records) === 1)
+    I have one record!
+    @elseif (count($records) > 1)
+    I have multiple records!
+    @else
+    I don't have any records!
+    @endif
+    --}}
+
     <!-- Content Section -->
     <section id="content" class="container ">
         <div class="row">
@@ -154,7 +170,32 @@
                 </div>
             </div>
 
+            <div class="card">
+    <div class="card-body">
             <div class="col-md-6">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Form Pertanyaan</h5>
+
+            <form action="{{ route('question.store') }}" method="POST">
+                @csrf
+                <div class="mb-3">
+                    <label for="nama" class="form-label">Nama</label>
+                    <input type="text" class="form-control" name="nama">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" class="form-control" name="email">
+                </div>
+                <div class="mb-3">
+                    <label for="pertanyaan" class="form-label">Pertanyaan</label>
+                    <textarea class="form-control" rows="4" name="pertanyaan"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Kirim Pertanyaan</button>
+            </form>
+        </div>
+    </div>
                 {{-- Alerts --}}
                 <div class="card ">
                     <div class="card-body">
@@ -229,6 +270,7 @@
             <p>&copy; {{date('Y')}} My Laravel App. All Rights Reserved.</p>
         </div>
     </footer>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
