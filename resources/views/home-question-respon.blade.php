@@ -52,6 +52,13 @@
 <body>
 
     <div class="thankyou-container">
+
+    @if (session('info'))
+        <div class="alert alert-info">
+            {!! session('info') !!}
+        </div>
+    @endif
+
         <h2>Terima Kasih, AIVA! 🎉</h2>
         <p class="lead">Pertanyaan Anda telah berhasil dikirim.</p>
 

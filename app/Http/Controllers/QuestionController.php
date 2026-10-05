@@ -11,7 +11,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        return view ('home-question-respon');
     }
 
     /**
@@ -46,7 +46,10 @@ public function store(Request $request)
         $data['email'] = $request->input('email');
         $data['pertanyaan'] = $request->input('pertanyaan');
 
-        return view('home-question-respon', $data);
+        //return view('home-question-respon', $data);
+
+        return redirect() ->route('question.index')->with('info','Data berhasil terkirim');
+
     }
 
     /**

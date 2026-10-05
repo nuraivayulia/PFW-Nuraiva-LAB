@@ -7,56 +7,14 @@
     <title>My Laravel App</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-        }
-
-        .navbar-brand {
-            font-weight: bold;
-        }
-
-        .navbar {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .hero-section {
-            background-color: #203d7a;
-            color: white;
-            padding: 50px 0;
-            text-align: center;
-        }
-
-        .hero-section h1 {
-            font-size: 3rem;
-        }
-
-        .card {
-            margin-top: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .footer {
-            margin-top: 50px;
-            padding: 20px 0;
-            background-color: #f8f9fa;
-            text-align: center;
-        }
-
-        .footer p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: #6c757d;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('assets/css/custom-style.css') }}">
 </head>
 
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">My Laravel App</a>
+            <a class="navbar-brand font-custom" href="#">My Laravel App</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -79,9 +37,11 @@
         </div>
     </nav>
 
+
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
+                <img src="{{ asset('assets/images/logo.jpg') }}" alt="Logo">
              <h1 class="display-6 mb-2">Welcome Aboard!</h1>
              <h1> {{ $username }} </h1>
              <p> {{ $last_login }} </p>
@@ -89,10 +49,6 @@
         </div>
     </section>
 
-       {{-- Perulangan --}}
-    @for ($i = 0; $i < 10; $i++)
-    The current value is {{ $i }}
-    @endfor
 
     {{-- If-Else --}}
     {{--
@@ -169,10 +125,11 @@
                     </div>
                 </div>
             </div>
+        <div class="col-md-6">
+    <div class="card">
 
-            <div class="card">
-    <div class="card-body">
-            <div class="col-md-6">
+        <div class="card-body">
+
 
     <div class="card">
         <div class="card-body">
