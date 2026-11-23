@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PelangganController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,33 +22,39 @@ Route::get('/mahasiswa', function () {
 })->name('mahasiswa.show');
 
 Route::get('/nama/{$param1}', function ($param1) {
-    return 'Nama saya: '.$param1;
+    return 'Nama saya: ' . $param1;
 });
 
-Route ::get('/nim/{param1?}',function($param1 = '2557301101'){
-    return 'NIM saya: '.$param1;
+Route::get('/nim/{param1?}', function ($param1 = '2557301101') {
+    return 'NIM saya: ' . $param1;
 });
 
-Route::get('/mahasiswa', function(){
+Route::get('/mahasiswa', function () {
     return 'Halo Mahasiswa';
-}) ->name('mahasiswa.show');
+})->name('mahasiswa.show');
 
-Route::get('/mahasiswa/{param1}', [MahasiswaController::class,'show']);
+Route::get('/mahasiswa/{param1}', [MahasiswaController::class, 'show']);
 
-Route::get('/home',[HomeController::class,'index']);
+Route::get('/home', [HomeController::class, 'index']);
 
 Route::post('question/store', [QuestionController::class, 'store'])
-		->name('question.store');
+    ->name('question.store');
 
 Route::get('/question', [QuestionController::class, 'index'])
-		->name('question.index');
+    ->name('question.index');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
-        ->name('dashboard.index');
+    ->name('dashboard.index');
 
 Route::resource('pelanggan', PelangganController::class);
 
 Route::post('/pelanggan', [PelangganController::class, 'store'])
-        ->name('pelanggan.store');
+    ->name('pelanggan.store');
 
 Route::resource('user', UserController::class);
+
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/logout', [AuthController::class, 'logout'])
+    ->middleware('auth')
+    ->name('auth.logout');
