@@ -25,13 +25,13 @@
                 <p class="mb-0">Form untuk mengedit data user.</p>
             </div>
             <div>
-                <a href="{{ route('user.index') }}" class="btn btn-primary"><i
-                        class="far fa-question-circle me-1"></i> Kembali</a>
+                <a href="{{ route('user.index') }}" class="btn btn-primary"><i class="far fa-question-circle me-1"></i>
+                    Kembali</a>
             </div>
         </div>
     </div>
 
-            @if (session('success'))
+    @if (session('success'))
         <div class="alert alert-success">{!! session('success') !!}</div>
     @endif
     @if (session('error'))
@@ -78,6 +78,30 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+                            </div>
+
+                            {{-- Role --}}
+                            <div class="mb-3">
+                                <label for="role" class="form-label">Role</label>
+                                <select name="role" id="role"
+                                    class="form-select @error('role') is-invalid @enderror" required>
+                                    <option value="">Pilih Role</option>
+                                    <option value="Super Admin"
+                                        {{ old('role', $dataUser->role) == 'Super Admin' ? 'selected' : '' }}>
+                                        Super Admin
+                                    </option>
+                                    <option value="Pelanggan"
+                                        {{ old('role', $dataUser->role) == 'Pelanggan' ? 'selected' : '' }}>
+                                        Pelanggan
+                                    </option>
+                                    <option value="Mitra" {{ old('role', $dataUser->role) == 'Mitra' ? 'selected' : '' }}>
+                                        Mitra
+                                    </option>
+                                </select>
+
+                                @error('role')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-lg-6 col-sm-12">

@@ -41,10 +41,12 @@ Route::post('question/store', [QuestionController::class, 'store'])
     ->name('question.store');
 
 Route::get('/question', [QuestionController::class, 'index'])
-    ->name('question.index');
+    ->name('question.index')
+    ->middleware('checkislogin');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->name('dashboard.index');
+    ->name('dashboard.index')
+    ->middleware('checkislogin');
 
 Route::resource('pelanggan', PelangganController::class);
 
@@ -53,8 +55,10 @@ Route::post('/pelanggan', [PelangganController::class, 'store'])
 
 Route::resource('user', UserController::class);
 
-Route::get('/login', [AuthController::class, 'index'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::get('/login', [AuthController::class, 'index'])
+    ->name('login');
+Route::post('/login', [AuthController::class, 'login'])
+    ->name('auth.login');
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('auth.logout');

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -30,20 +29,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-    $request->validate([
-        'name'     => 'required|string|max:100',
-        'email'    => 'required|email|unique:users,email',
-        'password' => 'required|min:8|confirmed',
-    ]);
+        $request->validate([
+            'name'     => 'required|string|max:100',
+            'email'    => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmed',
+            'role'     => 'required|in:Super Admin,Admin,Mitra',
+        ]);
 
-    $data['name']     = $request->name;
-    $data['email']    = $request->email;
-    $data['password'] = Hash::make($request->password);
+        $data['name']     = $request->name;
+        $data['email']    = $request->email;
+        $data['password'] = Hash::make($request->password);
 
-    User::create($data);
+        User::create($data);
 
-    return redirect()->route('user.index')->with('success', 'Penambahan Data Berhasil!');
-}
+        return redirect()->route('user.index')->with('success', 'Penambahan Data Berhasil!');
+    }
 
     /**
      * Display the specified resource.
@@ -67,31 +67,34 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-    $user = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
-    $request->validate([
-        'name'     => 'required|string|max:100',
-        'email'    => 'required|email|unique:users,email,' . $user->id,
-        'password' => 'nullable|min:8|confirmed',
-    ]);
+        $request->validate([
+            'name'     => 'required|string|max:100',
+            'email'    => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|min:8|confirmed',
+            'role'     => 'required|in:Super Admin,Admin,Mitra',
+        ]);
 
-    $user->name  = $request->name;
-    $user->email = $request->email;
+        $user->name  = $request->name;
+        $user->email = $request->email;
 
-    if ($request->filled('password')) {
-        $user->password = Hash::make($request->password);
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->role = $request->role;
+        $user->save();
+
+        return redirect()
+        ->route('user.index')
+        ->with('success', 'Perubahan Data Berhasil!');
     }
-
-    $user->save();
-
-    return redirect()->route('user.index')->with('success', 'Perubahan Data Berhasil!');
-}
 
     /**
      * Remove the specified resource from storage.
      */
 
-        public function destroy(string $id)
+    public function destroy(string $id)
     {
         $user = User::findOrFail($id);
 
