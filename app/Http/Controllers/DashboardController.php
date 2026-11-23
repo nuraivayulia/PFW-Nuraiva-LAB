@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index(){
+        if (! auth()->check()) {
+            return redirect()
+                ->route('auth.login')
+                ->withErrors('Silahkan login terlebih dahulu');
+        }
         return view('admin.dashboard');
     }
 }
